@@ -52,14 +52,14 @@ summary{cursor:pointer;color:var(--ui-muted)}
 #guideLine.arrows .arrow{display:block}
 #guideLine .l{left:8px}#guideLine .r{right:8px}
 #guideLine.off{display:none}
-#progressBar{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.12)}
+#progressBar{z-index:2;position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.12)}
 #progressBar i{display:block;height:100%;width:0;background:var(--guide,#ff4040)}
 #progressBar.off{display:none}
-#clockBox{position:absolute;top:10px;right:14px;font:600 18px ui-monospace,monospace;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:8px;display:none}
+#clockBox{z-index:2;position:absolute;top:10px;right:14px;font:600 18px ui-monospace,monospace;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:8px;display:none}
 #clockBox.on{display:block}
-#countdownBox{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 22vmin system-ui;color:#fff;background:rgba(0,0,0,.6);text-shadow:0 0 30px #000}
+#countdownBox{z-index:2;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 22vmin system-ui;color:#fff;background:rgba(0,0,0,.6);text-shadow:0 0 30px #000}
 
-#controls{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:rgba(20,22,28,.92);border:1px solid #333;border-radius:14px;padding:12px 14px;transition:opacity .3s;max-width:96vw;flex-wrap:wrap;justify-content:center}
+#controls{z-index:10;position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:rgba(20,22,28,.92);border:1px solid #333;border-radius:14px;padding:12px 14px;transition:opacity .3s;max-width:96vw;flex-wrap:wrap;justify-content:center}
 #controls.hide{opacity:0;pointer-events:none}
 #controls button{padding:12px 18px;font-size:26px;line-height:1;min-width:56px;border-radius:12px}
 #speedLbl{color:#cfd3dd;min-width:64px;text-align:center;font-size:18px}
