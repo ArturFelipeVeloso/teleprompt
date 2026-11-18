@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleprompter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- EDITOR -->
+<main id="editor">
+  <header>
+    <h1>Teleprompter</h1>
+    <div class="row">
+      <label class="btn">Abrir .txt<input type="file" id="file" accept=".txt,.md,text/plain" hidden></label>
+      <button id="clear" class="btn">Limpar</button>
+      <button id="start" class="btn primary">▶ Iniciar</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="card">
+      <h2>Roteiro</h2>
+      <textarea id="text" placeholder="Cole seu texto aqui...&#10;&#10;Dicas:&#10;• Linha em branco = pausa visual&#10;• [texto entre colchetes] = anotação/cue em destaque&#10;• Linha começando com // é ignorada"></textarea>
+      <div class="muted" id="stats"></div>
+    </section>
+
+    <section class="card" id="settings">
+      <h2>Configurações</h2>
+
+      <fieldset><legend>Rolagem</legend>
+        <label>Velocidade <output data-for="speed"></output><input type="range" id="speed" min="5" max="400" step="1"></label>
+        <label>Contagem regressiva (s) <output data-for="countdown"></output><input type="range" id="countdown" min="0" max="10" step="1"></label>
+        <label>Rolagem suave (aceleração) <output data-for="easing"></output><input type="range" id="easing" min="0" max="3" step="0.1"></label>
+        <label class="chk"><input type="checkbox" id="loop"> Repetir ao terminar</label>
+        <label class="chk"><input type="checkbox" id="autoStop" > Parar no fim</label>
+        <label class="chk"><input type="checkbox" id="wheel"> Roda do mouse controla velocidade</label>
+      </fieldset>
+
+      <fieldset><legend>Texto</legend>
+        <label>Fonte
+          <select id="font">
+            <option value="system-ui, sans-serif">Sistema</option>
+            <option value="Arial, Helvetica, sans-serif">Arial</option>
+            <option value="Verdana, Geneva, sans-serif">Verdana</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', serif">Times</option>
+            <option value="'Courier New', monospace">Courier</option>
+            <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
+            <option value="Impact, sans-serif">Impact</option>
+            <option value="'Comic Sans MS', cursive">Comic Sans</option>
+          </select>
+        </label>
+        <label>Tamanho <output data-for="size"></output><input type="range" id="size" min="16" max="260" step="1"></label>
+        <label>Espaçamento entre linhas <output data-for="lineHeight"></output><input type="range" id="lineHeight" min="0.9" max="3" step="0.05"></label>
+        <label>Espaçamento entre letras <output data-for="letterSpacing"></output><input type="range" id="letterSpacing" min="-2" max="20" step="0.5"></label>
+        <label>Espaço entre parágrafos <output data-for="paraGap"></output><input type="range" id="paraGap" min="0" max="3" step="0.1"></label>
+        <label>Peso
+          <select id="weight"><option value="300">Leve</option><option value="400">Normal</option><option value="600">Semi-negrito</option><option value="700">Negrito</option><option value="900">Extra</option></select>
+        </label>
+        <label>Alinhamento
+          <select id="align"><option value="left">Esquerda</option><option value="center">Centro</option><option value="right">Direita</option><option value="justify">Justificado</option></select>
+        </label>
+        <label class="chk"><input type="checkbox" id="upper"> MAIÚSCULAS</label>
+      </fieldset>
+
+      <fieldset><legend>Cores</legend>
+        <label>Texto <input type="color" id="color"></label>
+        <label>Fundo <input type="color" id="bg"></label>
+        <label>Anotações [cue] <input type="color" id="cueColor"></label>
+        <label>Linha guia <input type="color" id="guideColor"></label>
+        <label class="chk"><input type="checkbox" id="dim"> Escurecer texto fora da linha guia</label>
+        <label>Intensidade do escurecimento <output data-for="dimAmount"></output><input type="range" id="dimAmount" min="0" max="0.9" step="0.05"></label>
+      </fieldset>
+
+      <fieldset><legend>Layout</legend>
+        <label>Largura do texto <output data-for="width"></output><input type="range" id="width" min="20" max="100" step="1"></label>
+        <label>Margem superior/inferior (vh) <output data-for="padV"></output><input type="range" id="padV" min="0" max="80" step="1"></label>
+        <label>Posição da linha guia <output data-for="guidePos"></output><input type="range" id="guidePos" min="5" max="95" step="1"></label>
+        <label class="chk"><input type="checkbox" id="guide"> Mostrar linha guia</label>
+        <label class="chk"><input type="checkbox" id="guideArrows"> Setas laterais</label>
+        <label class="chk"><input type="checkbox" id="progress"> Barra de progresso</label>
+        <label class="chk"><input type="checkbox" id="clock"> Relógio / tempo restante</label>
+        <label class="chk"><input type="checkbox" id="showControls"> Controles visíveis sempre</label>
+      </fieldset>
+
+      <fieldset><legend>Espelho</legend>
+        <label class="chk"><input type="checkbox" id="flipX"> Espelhar horizontal (vidro de teleprompter)</label>
+        <label class="chk"><input type="checkbox" id="flipY"> Espelhar vertical</label>
+      </fieldset>
+
+      <fieldset><legend>Perfil</legend>
+        <div class="row">
+          <button id="export" class="btn">Exportar config</button>
+          <label class="btn">Importar config<input type="file" id="importCfg" accept=".json" hidden></label>
+          <button id="reset" class="btn">Restaurar padrão</button>
+        </div>
+      </fieldset>
+
+      <details class="keys"><summary>Atalhos</summary>
+        <ul>
+          <li><kbd>Espaço</kbd> play / pausa</li>
+          <li><kbd>↑</kbd> <kbd>↓</kbd> velocidade</li>
+          <li><kbd>+</kbd> <kbd>-</kbd> tamanho da fonte</li>
+          <li><kbd>←</kbd> <kbd>→</kbd> voltar / avançar 5s</li>
+          <li><kbd>PgUp</kbd> <kbd>PgDn</kbd> pular tela</li>
+          <li><kbd>Home</kbd> / <kbd>R</kbd> reiniciar</li>
+          <li><kbd>M</kbd> espelho horizontal · <kbd>V</kbd> vertical</li>
+          <li><kbd>G</kbd> linha guia · <kbd>C</kbd> controles</li>
+          <li><kbd>F</kbd> tela cheia · <kbd>Esc</kbd> voltar ao editor</li>
+        </ul>
+      </details>
+    </section>
+  </div>
+</main>
+
+<!-- PROMPTER -->
+<div id="prompter" hidden>
+  <div id="viewport">
+    <div id="scroller"><div id="content"></div></div>
+    <div id="guideLine"><span class="arrow l">▶</span><span class="arrow r">◀</span></div>
+    <div id="countdownBox" hidden></div>
+    <div id="progressBar"><i></i></div>
+    <div id="clockBox"></div>
+  </div>
+  <div id="controls">
+    <button id="bBack" title="Editor (Esc)">✕</button>
+    <button id="bRestart" title="Reiniciar">⏮</button>
+    <button id="bRew" title="Voltar">⏪</button>
+    <button id="bPlay" class="primary" title="Play/Pausa (Espaço)">▶</button>
+    <button id="bFwd" title="Avançar">⏩</button>
+    <button id="bSlow" title="Mais lento">−</button>
+    <span id="speedLbl"></span>
+    <button id="bFast" title="Mais rápido">+</button>
+    <button id="bSmall" title="Fonte menor">A−</button>
+    <button id="bBig" title="Fonte maior">A+</button>
+    <button id="bMirror" title="Espelhar">⇋</button>
+    <button id="bFull" title="Tela cheia">⛶</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

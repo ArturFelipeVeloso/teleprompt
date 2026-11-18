@@ -1,0 +1,65 @@
+:root{
+  --ui-bg:#0f1115; --ui-card:#181b22; --ui-line:#2a2f3a; --ui-text:#e8eaf0; --ui-muted:#8b93a5; --ui-accent:#4f8cff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ui-bg);color:var(--ui-text);font:15px/1.4 system-ui,sans-serif}
+[hidden]{display:none!important}
+
+/* editor */
+#editor{max-width:1200px;margin:0 auto;padding:20px 16px 40px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{margin:0;font-size:22px}
+h2{margin:0 0 12px;font-size:15px;color:var(--ui-muted);text-transform:uppercase;letter-spacing:.06em}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.layout{display:grid;grid-template-columns:1fr 380px;gap:16px;align-items:start}
+@media(max-width:860px){.layout{grid-template-columns:1fr}}
+.card{background:var(--ui-card);border:1px solid var(--ui-line);border-radius:12px;padding:16px}
+#text{width:100%;height:60vh;min-height:280px;resize:vertical;background:var(--ui-bg);color:var(--ui-text);border:1px solid var(--ui-line);border-radius:8px;padding:12px;font:16px/1.5 system-ui,sans-serif}
+#text:focus{outline:2px solid var(--ui-accent)}
+.muted{color:var(--ui-muted);font-size:13px;margin-top:8px}
+.btn,button{background:var(--ui-card);color:var(--ui-text);border:1px solid var(--ui-line);padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit}
+.btn:hover,button:hover{border-color:var(--ui-accent)}
+.primary{background:#2a67d8;border-color:#2a67d8;color:#fff;font-weight:600}
+fieldset{border:1px solid var(--ui-line);border-radius:8px;margin:0 0 12px;padding:10px 12px}
+legend{color:var(--ui-muted);padding:0 6px;font-size:13px}
+fieldset label{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0;font-size:14px}
+fieldset label.chk{justify-content:flex-start}
+fieldset label input[type=range]{flex:1;min-width:0;max-width:150px}
+fieldset select{background:var(--ui-bg);color:var(--ui-text);border:1px solid var(--ui-line);border-radius:6px;padding:5px}
+fieldset input[type=color]{width:46px;height:28px;border:none;background:none;padding:0}
+output{color:var(--ui-muted);font-size:12px;min-width:38px;text-align:right;margin-left:auto}
+.keys ul{margin:8px 0 0;padding-left:18px;color:var(--ui-muted);font-size:13px}
+kbd{background:var(--ui-bg);border:1px solid var(--ui-line);border-radius:4px;padding:1px 6px;font-size:12px}
+summary{cursor:pointer;color:var(--ui-muted)}
+
+/* prompter */
+#prompter{position:fixed;inset:0;background:#000;z-index:10}
+#viewport{position:absolute;inset:0;overflow:hidden;background:var(--bg,#000);cursor:none}
+#viewport.showCursor{cursor:default}
+#viewport.flipX{transform:scaleX(-1)}
+#viewport.flipY{transform:scaleY(-1)}
+#viewport.flipX.flipY{transform:scale(-1,-1)}
+#scroller{position:absolute;left:0;right:0;top:0;will-change:transform}
+#content{margin:0 auto;width:var(--width,80%);color:var(--color,#fff);font-family:var(--font);font-size:var(--size,64px);line-height:var(--lh,1.5);letter-spacing:var(--ls,0);font-weight:var(--weight,600);text-align:var(--align,center);padding:var(--padV,40vh) 0;word-wrap:break-word}
+#content p{margin:0 0 var(--gap,1em)}
+#content p.blank{height:var(--gap,1em);margin:0}
+#content .cue{color:var(--cue,#ffd34e);font-size:.55em;font-style:italic;text-transform:none;opacity:.95}
+#content.upper{text-transform:uppercase}
+#content.dim p{opacity:var(--dimOpacity,.3);transition:opacity .15s}
+#content.dim p.active{opacity:1}
+#guideLine{position:absolute;left:0;right:0;top:var(--guidePos,40%);height:0;border-top:2px solid var(--guide,#ff4040);pointer-events:none;opacity:.8}
+#guideLine .arrow{position:absolute;top:-14px;font-size:22px;color:var(--guide,#ff4040);display:none}
+#guideLine.arrows .arrow{display:block}
+#guideLine .l{left:8px}#guideLine .r{right:8px}
+#guideLine.off{display:none}
+#progressBar{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.12)}
+#progressBar i{display:block;height:100%;width:0;background:var(--guide,#ff4040)}
+#progressBar.off{display:none}
+#clockBox{position:absolute;top:10px;right:14px;font:600 18px ui-monospace,monospace;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:8px;display:none}
+#clockBox.on{display:block}
+#countdownBox{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 22vmin system-ui;color:#fff;background:rgba(0,0,0,.6);text-shadow:0 0 30px #000}
+
+#controls{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(20,22,28,.92);border:1px solid #333;border-radius:14px;padding:8px 10px;transition:opacity .3s;max-width:96vw;flex-wrap:wrap;justify-content:center}
+#controls.hide{opacity:0;pointer-events:none}
+#controls button{padding:7px 11px;font-size:15px}
+#speedLbl{color:#cfd3dd;min-width:44px;text-align:center;font-size:13px}
