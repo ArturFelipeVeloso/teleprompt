@@ -59,7 +59,7 @@ summary{cursor:pointer;color:var(--ui-muted)}
 #clockBox.on{display:block}
 #countdownBox{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:900 22vmin system-ui;color:#fff;background:rgba(0,0,0,.6);text-shadow:0 0 30px #000}
 
-#controls{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(20,22,28,.92);border:1px solid #333;border-radius:14px;padding:8px 10px;transition:opacity .3s;max-width:96vw;flex-wrap:wrap;justify-content:center}
+#controls{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:rgba(20,22,28,.92);border:1px solid #333;border-radius:14px;padding:12px 14px;transition:opacity .3s;max-width:96vw;flex-wrap:wrap;justify-content:center}
 #controls.hide{opacity:0;pointer-events:none}
-#controls button{padding:7px 11px;font-size:15px}
-#speedLbl{color:#cfd3dd;min-width:44px;text-align:center;font-size:13px}
+#controls button{padding:12px 18px;font-size:26px;line-height:1;min-width:56px;border-radius:12px}
+#speedLbl{color:#cfd3dd;min-width:64px;text-align:center;font-size:18px}
