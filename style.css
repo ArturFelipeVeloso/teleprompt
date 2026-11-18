@@ -47,8 +47,8 @@ summary{cursor:pointer;color:var(--ui-muted)}
 #content.upper{text-transform:uppercase}
 #content.dim p{opacity:var(--dimOpacity,.3);transition:opacity .15s}
 #content.dim p.active{opacity:1}
-#guideLine{position:absolute;left:0;right:0;top:var(--guidePos,40%);height:0;border-top:2px solid var(--guide,#ff4040);pointer-events:none;opacity:.8}
-#guideLine .arrow{position:absolute;top:-14px;font-size:22px;color:var(--guide,#ff4040);display:none}
+#guideLine{position:absolute;left:0;right:0;top:var(--guidePos,40%);height:calc(var(--size,64px)*var(--lh,1.5) + .3em);transform:translateY(-50%);background:color-mix(in srgb,var(--guide,#ff4040) 22%,transparent);border-top:2px solid var(--guide,#ff4040);border-bottom:2px solid var(--guide,#ff4040);pointer-events:none}
+#guideLine .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:22px;color:var(--guide,#ff4040);display:none}
 #guideLine.arrows .arrow{display:block}
 #guideLine .l{left:8px}#guideLine .r{right:8px}
 #guideLine.off{display:none}
